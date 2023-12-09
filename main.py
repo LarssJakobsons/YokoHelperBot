@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 import json
 import asyncio
 from datetime import datetime
+from website import start
 
 load_dotenv()
+start()
 
 intents: Intents = Intents.ALL
 
