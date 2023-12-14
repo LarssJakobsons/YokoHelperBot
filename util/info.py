@@ -2,19 +2,29 @@ from interactions import *
 
 color = Color.from_hex("#e7a1ff")
 
-info_main = Embed(
-    title="<a:icon:1176932612535758931> Information <a:icon:1176932612535758931>",
-    description="""
-**💕Our server is a cute wholesome server based on helping people and their mental health, while having a fun relaxing side for people to enjoy💕**
-❕ This channel is used to provide information regarding Yoko.
+info_main = [
+    Embed(
+        images=[
+            "https://media.discordapp.net/attachments/1160669900516380795/1179132192203477063/bvcrn3y8.png?ex=6578ab6d&is=6566366d&hm=95fde5ce6c04b5a6c1d8fba0a22a013cdb4c39406b8031b40f523b6a615c71cf&=&format=webp&quality=lossless&width=1104&height=433"
+        ],
+        color=color,
+    ),
+    Embed(
+        title="<a:icon:1176932612535758931> Information <a:icon:1176932612535758931>",
+        description="""
+⨯ . ⁺ ✦ ⊹ ꙳ ⁺ ‧ ⨯. ⁺ ✦ ⊹ . * ꙳ ✦ ⊹⨯ . ⁺ ✦ ⊹ ꙳ ⁺ ‧ ⨯. ⁺ ✦ ⊹ . * ꙳ ✦ ⊹
+‧˚₊꒷୭୧︵︵✦︰Yoko ︰✦︵︵˚₊੭
+**<a:2f2_0DecorButterfly:978400622611144724> Our server is a cute wholesome server based on helping people and their mental health, while having a fun relaxing side for people to enjoy <a:2f2_0DecorButterfly:978400622611144724>**
+<a:pink_arrowheart:1165567792506998854> This channel is used to provide information regarding Yoko.
 🍙 Press the buttons below for more information!
 ︰๑‧˚₊꒷꒦₊˚꒷————꒰ఎ ♡ ໒꒱ ꒷˚₊੭————꒷꒦₊˚๑‧˚₊︰
 """,
-    color=color,
-    images=[
-        "https://media.discordapp.net/attachments/999867567093067797/1140053139324670052/2997795E-50AF-4AC4-A326-F6B82BF99BFB.png?width=636&height=25"
-    ],
-)
+        color=color,
+        images=[
+            "https://media.discordapp.net/attachments/999867567093067797/1140053139324670052/2997795E-50AF-4AC4-A326-F6B82BF99BFB.png?width=636&height=25"
+        ],
+    ),
+]
 
 info_staff = Embed(
     title="🛠 Staff 🛠",
@@ -86,9 +96,15 @@ class Info(Extension):
     @slash_command(name="init_info", description="Initialize the info message")
     # @check(is_owner())
     async def init_info(self, ctx: InteractionContext):
+        global webhook
+        # webhook = Webhook.from_url(
+        #     url="https://discord.com/api/webhooks/1166005308922015744/9dR8f120iQW_Tg6T1XmaCVQUH5zrUWJh44_lYiuMrFtwQ7ahFch_mZLKa5FQw_LobIOq",
+        #     client=self.bot,
+        # )
+        webhook = self.bot.get_channel(1160670578181681172)
         components = ActionRow(*buttons)
         await ctx.send("Yippee", ephemeral=True)
-        await ctx.channel.send(embed=info_main, components=components)
+        await webhook.send(embed=info_main, components=components)
 
     @listen()
     async def on_component(self, ctx: ComponentContext):

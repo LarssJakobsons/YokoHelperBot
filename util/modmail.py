@@ -1,16 +1,23 @@
 from interactions import *
 
-embed_modmail = Embed(
-    title="Modmail",
-    description="Click the button below to send a message to the mod mail",
-    color=Color.from_hex("#b5b5b5"),
-    footer=EmbedFooter(
-        text="Unnecesary reports/messages will be ignored and/or punished"
+
+embeds_modmail = [
+    Embed(
+        color=Color.from_hex("#52e3ab"),
+        images=["https://cdn.discordapp.com/attachments/1175837826475102241/1184908005590958160/21522863fba6eeee04b07aa57dc7b271.png?ex=658dae93&is=657b3993&hm=523a6d3848aa9736da7cef80d8a2d29cc4e09d556dd6e4e21bc90d1645260f51&"],
     ),
-)
+    Embed(
+    title="<a:pink_00exclaimation:1180433473002020924> Modmail <a:pink_00exclaimation:1180433473002020924>",
+    description="Click the button below to send a message to the mod mail",
+    color=Color.from_hex("#52e3ab"),
+    footer=EmbedFooter(
+        text="Please use this for modmail only, not for general questions!"
+    ),
+    images=["https://cdn.discordapp.com/attachments/1175837826475102241/1184908211145429062/786774d88aee8486cb6106b8de8f0916.png?ex=658daec4&is=657b39c4&hm=446c5cdf4488a5be5e53e54805b2d50ebc0f5b6ea3d834bbd81bab837b1a7de5&"]
+)]
 
 embed_afterclick = Embed(
-    title="Please select a reason",
+    title="<a:pink_00exclaimation:1180433473002020924> Please select a reason <a:pink_00exclaimation:1180433473002020924>",
     description="❕ If this was a mistake, ignore this message ❕",
     color=Color.from_hex("#b5b5b5"),
     footer=EmbedFooter(
@@ -29,7 +36,7 @@ components_afterclick = [
         style=ButtonStyle.GRAY,
         label="Report a bug/permission leak",
         custom_id="bug_m",
-        emoji="🐛,,"
+        emoji="🐛"
     ),
     Button(
         style=ButtonStyle.GRAY, label="Report a user", custom_id="report_m", emoji="⚠️"
@@ -121,7 +128,7 @@ modal_other = Modal(
     custom_id="other",
 )
 
-modmail_category_id = 1177325562713346190
+modmail_category_id = 1184943414689669190
 
 
 class ModMail(Extension):
@@ -129,7 +136,7 @@ class ModMail(Extension):
     # @check(is_owner())
     async def init_modmail(self, ctx: InteractionContext):
         await ctx.send("Yippee", ephemeral=True)
-        await ctx.channel.send(embed=embed_modmail, components=components_modmail)
+        await self.bot.get_channel(1166659449356824688).send(embed=embeds_modmail, components=components_modmail)
 
     @listen()
     async def on_component(self, ctx: ComponentContext):
@@ -138,7 +145,7 @@ class ModMail(Extension):
         if event_id.endswith("_m"):
             if event_id.startswith("modmail"):
                 await ctx.send(
-                    embed=embed_modmail,
+                    embed=embeds_modmail,
                     components=components_afterclick,
                     ephemeral=True,
                 )

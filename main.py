@@ -18,7 +18,7 @@ bot = inter.Client(
 
 AutoRefreshMessage = None
 AutoRefreshChannel = None
-button = Button(style=ButtonStyle.GRAY, label="🔄", custom_id="refresh_ad")
+buttons = [Button(style=ButtonStyle.GREEN, label="🔄", custom_id="refresh_ad"), Button(style=ButtonStyle.GRAY, label="🗑", custom_id="delete_msg")]
 
 
 def create_embed(goal, current):
@@ -48,24 +48,36 @@ async def automessage_send():
     if AutoRefreshMessage == None:
         AutoRefreshMessage = await AutoRefreshChannel.send(
             embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
-            components=ActionRow(button),
+            components=ActionRow(*buttons),
         )
     else:
-        await AutoRefreshMessage.edit(
-            embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
-            components=ActionRow(button),
-        )
+        try:
+            await AutoRefreshMessage.edit(
+                embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
+                components=ActionRow(*buttons),
+            )
+        except:
+            AutoRefreshMessage = await AutoRefreshChannel.send(
+                embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
+                components=ActionRow(*buttons),
+            )
 
 
 @listen()
 async def on_component(ctx: ComponentContext):
     event_id = ctx.ctx.custom_id
     if event_id.endswith("_ad"):
-        await ctx.ctx.send("Refreshed!", ephemeral=True)
+        await ctx.ctx.send("Thank you for refreshing the stats!", ephemeral=True)
         await AutoRefreshMessage.edit(
             embed=create_embed(len(AutoRefreshChannel.guild.members), 100),
-            components=ActionRow(button),
+            components=ActionRow(*buttons),
         )
+    if event_id == "delete_msg":
+        if ctx.ctx.author.has_permission(Permissions.MANAGE_MESSAGES):
+            await ctx.ctx.message.delete()
+        else:
+            await ctx.ctx.send("You don't have permission to do that!", ephemeral=True)
+
 
 
 @listen()
@@ -76,8 +88,8 @@ async def on_ready():
     )
     print(f"Bot has logged in as {bot.user}")
     bot.load_extension("util.verify")
-    bot.load_extension("util.roles")
-    bot.load_extension("util.partner")
+    # bot.load_extension("util.roles")
+    # bot.load_extension("util.partner")
     bot.load_extension("util.info")
     bot.load_extension("util.modmail")
 
@@ -99,8 +111,8 @@ async def on_ready():
     opt_type=OptionType.STRING,
     choices=[
         SlashCommandChoice(name="verify", value="util.verify"),
-        SlashCommandChoice(name="roles", value="util.roles"),
-        SlashCommandChoice(name="partner", value="util.partner"),
+        # SlashCommandChoice(name="roles", value="util.roles"),
+        # SlashCommandChoice(name="partner", value="util.partner"),
         SlashCommandChoice(name="info", value="util.info"),
         SlashCommandChoice(name="modmail", value="util.modmail"),
     ],
@@ -108,8 +120,8 @@ async def on_ready():
 async def reload(ctx: InteractionContext, extension: str):
     if extension is None:
         await bot.reload_extension("util.verify")
-        await bot.reload_extension("util.roles")
-        await bot.reload_extension("util.partner")
+        # await bot.reload_extension("util.roles")
+        # await bot.reload_extension("util.partner")
         await bot.reload_extension("util.info")
         await bot.reload_extension("util.modmail")
         await ctx.send("Reloaded!", ephemeral=True)
