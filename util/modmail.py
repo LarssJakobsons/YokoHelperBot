@@ -145,7 +145,7 @@ class ModMail(Extension):
         if event_id.endswith("_m"):
             if event_id.startswith("modmail"):
                 await ctx.send(
-                    embed=embeds_modmail,
+                    embed=embed_afterclick,
                     components=components_afterclick,
                     ephemeral=True,
                 )
