@@ -18,7 +18,10 @@ bot = inter.Client(
 
 AutoRefreshMessage = None
 AutoRefreshChannel = None
-buttons = [Button(style=ButtonStyle.GREEN, label="🔄", custom_id="refresh_ad"), Button(style=ButtonStyle.GRAY, label="🗑", custom_id="delete_msg")]
+buttons = [
+    Button(style=ButtonStyle.GREEN, label="🔄", custom_id="refresh_ad"),
+    Button(style=ButtonStyle.GRAY, label="🗑", custom_id="delete_msg",)
+]
 
 
 def create_embed(goal, current):
@@ -44,7 +47,7 @@ def create_embed(goal, current):
 
 @Task.create(IntervalTrigger(minutes=5))
 async def automessage_send():
-    global AutoRefreshMessage 
+    global AutoRefreshMessage
     if AutoRefreshMessage == None:
         AutoRefreshMessage = await AutoRefreshChannel.send(
             embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
@@ -79,12 +82,11 @@ async def on_component(ctx: ComponentContext):
             await ctx.ctx.send("You don't have permission to do that!", ephemeral=True)
 
 
-
 @listen()
 async def on_ready():
     global AutoRefreshChannel
-    AutoRefreshChannel = bot.get_guild(1175837825023889408).get_channel(
-        1180915701884665937
+    AutoRefreshChannel = bot.get_guild(1159976488200835142).get_channel(
+        1180527516356722758
     )
     print(f"Bot has logged in as {bot.user}")
     bot.load_extension("util.verify")

@@ -96,7 +96,7 @@ modal_bug = Modal(
 
 modal_report = Modal(
     ParagraphText(
-        label="Please describe the user and their rule breaking!",
+        label="Describe the user and their rule break!",
         custom_id="report_reason",
         placeholder="This user is breaking rule...",
         required=True,
