@@ -153,7 +153,9 @@ class ModMail(Extension):
                 opener_id = int(ctx.channel.topic)
                 permissions = [
                     PermissionOverwrite(deny=Permissions.VIEW_CHANNEL, type=OverwriteType.MEMBER, id=opener_id),
-                    PermissionOverwrite(deny=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=ctx.guild.default_role.id)
+                    PermissionOverwrite(deny=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=ctx.guild.default_role.id),
+                    PermissionOverwrite(allow=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=1162627137723977748),
+                    PermissionOverwrite(allow=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=1162627034334384258),
                 ]
                 await ctx.channel.edit(permission_overwrites=permissions)
                 await ctx.message.channel.send(f"{ctx.author.mention} has closed this mail")
