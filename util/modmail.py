@@ -7,17 +7,17 @@ embeds_modmail = [
         images=["https://cdn.discordapp.com/attachments/1175837826475102241/1184908005590958160/21522863fba6eeee04b07aa57dc7b271.png?ex=658dae93&is=657b3993&hm=523a6d3848aa9736da7cef80d8a2d29cc4e09d556dd6e4e21bc90d1645260f51&"],
     ),
     Embed(
-    title="<a:pink_00exclaimation:1180433473002020924> Modmail <a:pink_00exclaimation:1180433473002020924>",
-    description="Click the button below to send a message to the mod mail",
+    title="<a:a_blue_star:1160835426387513424> Create a ticket! <a:a_blue_star:1160835426387513424>",
+    description="Click the button below to create a ticket!",
     color=Color.from_hex("#52e3ab"),
     footer=EmbedFooter(
-        text="Please use this for modmail only, not for general questions!"
+        text="Please use this for tickets only, not for general questions!"
     ),
     images=["https://cdn.discordapp.com/attachments/1175837826475102241/1184908211145429062/786774d88aee8486cb6106b8de8f0916.png?ex=658daec4&is=657b39c4&hm=446c5cdf4488a5be5e53e54805b2d50ebc0f5b6ea3d834bbd81bab837b1a7de5&"]
 )]
 
 embed_afterclick = Embed(
-    title="<a:pink_00exclaimation:1180433473002020924> Please select a reason <a:pink_00exclaimation:1180433473002020924>",
+    title="<a:ramspin:1185560689998303362> Please select a reason <a:RemSpin:1180780686748176384>",
     description="❕ If this was a mistake, ignore this message ❕",
     color=Color.from_hex("#b5b5b5"),
     footer=EmbedFooter(
@@ -194,7 +194,9 @@ class ModMail(Extension):
 
                 permissions = [
                     PermissionOverwrite(allow=Permissions.VIEW_CHANNEL, type=OverwriteType.MEMBER, id=ctx.author.id),
-                    PermissionOverwrite(deny=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=ctx.guild.default_role.id)
+                    PermissionOverwrite(deny=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=ctx.guild.default_role.id),
+                    PermissionOverwrite(allow=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=1162627137723977748),
+                    PermissionOverwrite(allow=Permissions.VIEW_CHANNEL, type=OverwriteType.ROLE, id=1162627034334384258),
                 ]
 
                 category = await ctx.guild.fetch_channel(modmail_category_id)

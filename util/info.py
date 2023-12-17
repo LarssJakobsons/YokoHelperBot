@@ -14,8 +14,8 @@ info_main = [
         description="""
 ⨯ . ⁺ ✦ ⊹ ꙳ ⁺ ‧ ⨯. ⁺ ✦ ⊹ . * ꙳ ✦ ⊹⨯ . ⁺ ✦ ⊹ ꙳ ⁺ ‧ ⨯. ⁺ ✦ ⊹ . * ꙳ ✦ ⊹
 ‧˚₊꒷୭୧︵︵✦︰Yoko ︰✦︵︵˚₊੭
-**<a:2f2_0DecorButterfly:978400622611144724> Our server is a cute wholesome server based on helping people and their mental health, while having a fun relaxing side for people to enjoy <a:2f2_0DecorButterfly:978400622611144724>**
-<a:pink_arrowheart:1165567792506998854> This channel is used to provide information regarding Yoko.
+**<a:2f2_0DecorButterfly:1185131268715843665> Our server is a cute wholesome server based on helping people and their mental health, while having a fun relaxing side for people to enjoy <a:2f2_0DecorButterfly:978400622611144724>**
+<a:pink_heart~1t:1165567880528674867> This channel is used to provide information regarding Yoko.
 🍙 Press the buttons below for more information!
 ︰๑‧˚₊꒷꒦₊˚꒷————꒰ఎ ♡ ໒꒱ ꒷˚₊੭————꒷꒦₊˚๑‧˚₊︰
 """,
@@ -30,7 +30,8 @@ info_staff = Embed(
     title="🛠 Staff 🛠",
     description="""
     <@1026931524928536699> - Owner and creator
-    <@737983831000350731> - Mod and Developer
+    <@737983831000350731> - Co owner and developer
+    <@1175399006696902726> - Head mod
     """,
     images=[
         "https://media.discordapp.net/attachments/999867567093067797/1140053139324670052/2997795E-50AF-4AC4-A326-F6B82BF99BFB.png?width=636&height=25"

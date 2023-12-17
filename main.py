@@ -42,7 +42,7 @@ def create_embed(goal, current):
     return embed
 
 
-@Task.create(IntervalTrigger(minutes=1))
+@Task.create(IntervalTrigger(minutes=5))
 async def automessage_send():
     global AutoRefreshMessage 
     if AutoRefreshMessage == None:
