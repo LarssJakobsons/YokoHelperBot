@@ -72,7 +72,7 @@ async def on_component(ctx: ComponentContext):
     if event_id.endswith("_ad"):
         await ctx.ctx.send("Thank you for refreshing the stats!", ephemeral=True)
         await AutoRefreshMessage.edit(
-            embed=create_embed(len(AutoRefreshChannel.guild.members), 100),
+            embed=create_embed(300, AutoRefreshMessage.guild.member_count),
             components=ActionRow(*buttons),
         )
     if event_id == "delete_msg":
