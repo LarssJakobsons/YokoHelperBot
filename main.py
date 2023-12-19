@@ -50,18 +50,18 @@ async def automessage_send():
     global AutoRefreshMessage
     if AutoRefreshMessage == None:
         AutoRefreshMessage = await AutoRefreshChannel.send(
-            embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
+            embed=create_embed(300, AutoRefreshChannel.guild.member_count),
             components=ActionRow(*buttons),
         )
     else:
         try:
             await AutoRefreshMessage.edit(
-                embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
+                embed=create_embed(300, AutoRefreshChannel.guild.member_count),
                 components=ActionRow(*buttons),
             )
         except:
             AutoRefreshMessage = await AutoRefreshChannel.send(
-                embed=create_embed(100, len(AutoRefreshChannel.guild.members)),
+                embed=create_embed(300, AutoRefreshChannel.guild.member_count),
                 components=ActionRow(*buttons),
             )
 
@@ -77,6 +77,7 @@ async def on_component(ctx: ComponentContext):
         )
     if event_id == "delete_msg":
         if ctx.ctx.author.has_permission(Permissions.MANAGE_MESSAGES):
+            await ctx.ctx.send("The stat message has been deleted. A new one will appear in max 5 minutes", ephemeral=True)
             await ctx.ctx.message.delete()
         else:
             await ctx.ctx.send("You don't have permission to do that!", ephemeral=True)
