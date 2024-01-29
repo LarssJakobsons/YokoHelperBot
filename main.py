@@ -20,7 +20,7 @@ AutoRefreshMessage = None
 AutoRefreshChannel = None
 buttons = [
     Button(style=ButtonStyle.GREEN, label="🔄", custom_id="refresh_ad"),
-    Button(style=ButtonStyle.GRAY, label="🗑", custom_id="delete_msg",)
+    Button(style=ButtonStyle.GRAY, label="🗑", custom_id="delete_msg"),
 ]
 
 
@@ -44,6 +44,8 @@ def create_embed(goal, current):
     )
     return embed
 
+
+# I will prob either remove this completely or use the manual registration method instead https://interactions-py.github.io/interactions.py/Guides/40%20Tasks/#__tabbed_3_2
 
 @Task.create(IntervalTrigger(minutes=5))
 async def automessage_send():
@@ -77,26 +79,29 @@ async def on_component(ctx: ComponentContext):
         )
     if event_id == "delete_msg":
         if ctx.ctx.author.has_permission(Permissions.MANAGE_MESSAGES):
-            await ctx.ctx.send("The stat message has been deleted. A new one will appear in max 5 minutes", ephemeral=True)
+            await ctx.ctx.send(
+                "The stat message has been deleted. A new one will appear in max 5 minutes",
+                ephemeral=True,
+            )
             await ctx.ctx.message.delete()
         else:
             await ctx.ctx.send("You don't have permission to do that!", ephemeral=True)
 
+# --------
 
 @listen()
 async def on_ready():
     global AutoRefreshChannel
-    AutoRefreshChannel = bot.get_guild(1159976488200835142).get_channel(
-        1180527516356722758
-    )
+    AutoRefreshChannel = bot.get_channel(1180527516356722758)
     print(f"Bot has logged in as {bot.user}")
     bot.load_extension("util.verify")
     # bot.load_extension("util.roles")
     # bot.load_extension("util.partner")
     bot.load_extension("util.info")
     bot.load_extension("util.modmail")
+    bot.load_extension("util.warning")
 
-    automessage_send.start()
+    # automessage_send.start()
     await bot.change_presence(
         activity=Activity(
             name="you 👀",
